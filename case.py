@@ -1,4 +1,8 @@
-# Default project
+"""Case-study#5 Тесселяция
+Разработчики:
+Абраменко А.А.(), Головко И.Н.(), Зырянова О.О.()
+
+"""
 
 from turtle import setpos, forward, right, shape, fillcolor, pendown, speed, goto, penup, begin_fill, end_fill
 
