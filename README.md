@@ -1,2 +1,2 @@
 # cases
-Just 4 proga
+Testing repository 4 education
