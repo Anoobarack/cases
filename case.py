@@ -2,7 +2,7 @@
 
 from turtle import setpos, forward, right, shape, fillcolor, pendown, speed, goto, penup, begin_fill, end_fill
 
-def draw_hexagon(x, y, side_len, color):
+def draw_hexagon(x, y, side_len, color): # Функция рисует один гекс  
     fillcolor(color)
     setpos(x, y)
     pendown()
@@ -13,7 +13,7 @@ def draw_hexagon(x, y, side_len, color):
     end_fill()
     penup()
 
-def get_num_hexagons():
+def get_num_hexagons(): # Функция, выводящая количество гексов в ряду  
     print('Пожалуйста, введите количество шестиугольников, располагаемых в ряд: ', end = '')
     while True:
         try:
