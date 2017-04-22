@@ -25,13 +25,16 @@ def main():
     text = ''
     for line in f:
         for symbol in line:
-            if symbol == ' ' and line[line.find(symbol) - 1] == ' ':
-                line = line.replace(symbol, '')
             if symbol not in ALLOWED_SYMBS:
                 if symbol == '\n':
                     line = line.replace(symbol, ' ')
                 else: line = line.replace(symbol, '')
         text += line
+    text = text.replace(' ,', ',')
+    text = text.replace(' .', '.')
+    text = text.replace(' !', '!')
+    text = text.replace(' ?', '?')
+    text = text.replace('  ', ' ')
     print(text)
     f.close()
 
