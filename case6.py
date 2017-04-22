@@ -39,18 +39,22 @@ def main():
     Num_of_capitals = len(List_of_capitals)
     d = {}
     for i in range(len(List_of_words) - 1):
-        if d.get(i):
-            d[i] = list(d[i], i+1)
+        if d.get(List_of_words[i]):
+            a = []
+            a.append(d[List_of_words[i]])
+            a.append(List_of_words[i+1])
+            d[List_of_words[i]] = a
         else:
-            d[i] = i+1
+            d[List_of_words[i]] = List_of_words[i+1]
+    print(d)
 
     # Создание предложений.
     for i in range(amount_of_senstences):
         random.seed()
-        sentence = List_of_capitals(random.randint(0, Num_of_capitals - 1))
+        sentence = List_of_capitals[random.randint(0, Num_of_capitals - 1)]
         iterations = random.randint(4, 19)
         for j in range(iterations):
-            links = len(d[sentence(len(sentence) - 1)])
+            links = len(d[sentence])
             if links == 1:
                 word = d[sentence(len(sentence) - 1)]
             else:
