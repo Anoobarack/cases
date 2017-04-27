@@ -35,7 +35,6 @@ def main():
     text = text.replace(' !', '!')
     text = text.replace(' ?', '?')
     text = text.replace('  ', ' ')
-    print(text)
     f.close()
 
     # Установление связей.  
@@ -56,24 +55,27 @@ def main():
                     d[List_of_words[i]] = a
             else:
                 d[List_of_words[i]] = List_of_words[i+1]
-    print(d)
-
+    
     # Создание предложений.
     string = ''
     for i in range(amount_of_senstences):
         random.seed()
-        sentence = List_of_capitals[random.randint(0, Num_of_capitals - 1)]
+        lastword = List_of_capitals[random.randint(0, Num_of_capitals - 1)]
         iterations = random.randint(4, 19)
-        sentence = list(sentence)
+        string += lastword
         for j in range(iterations):
-            links = len(d[sentence[len(sentence) - 1]])
+            string += ' '
+            links = len(d[lastword])
             if links == 1:
-                word = d[sentence(len(sentence) - 1)]
+                word = d[lastword]
+                if word[len(word)-1] == '.':
+                    j = iterations
             else:
-                word = d[sentence(len(sentence) - 1)][random.randint(0,links-1)]
-            sentence.append(word)
-        for k in sentence:
-            string += k + ' '
+                word = d[lastword][random.randint(0,links-1)]
+                if word[len(word)-1] == '.':
+                    j = iterations
+            string += lastword
+            lastword = word
     print(string, end = '')
         
 
