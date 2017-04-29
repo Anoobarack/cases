@@ -2,7 +2,7 @@
 
 """Case-study#6 Генерация предложений
 Разработчики:
-Абраменко А.А.(), Головко И.Н.(), Зырянова О.О.()
+Абраменко А.А.(5), Головко И.Н.(70), Зырянова О.О.(20)
 """
 
 import random
@@ -37,11 +37,11 @@ def main():
     text = text.replace('  ', ' ')
     f.close()
 
-    # Установление связей.  
+    # Первичная обработка текста.  
     List_of_words = text.split(' ')
     if '' in List_of_words:
         List_of_words.remove('')
-    List_of_capitals = []    # Список заглавных слов
+    List_of_capitals = []    # Список заглавных слов  
     List_of_endings = []    # Список конечных слов  
     for element in List_of_words:
         if element == '':
@@ -50,7 +50,9 @@ def main():
             List_of_capitals.append(element)
         if element[len(element)-1] in '.?!':
             List_of_endings.append(element)
-    Num_of_capitals = len(List_of_capitals)
+    Amount_of_capitals = len(List_of_capitals)
+    
+    # Создание словаря связей.  
     d = {}
     for i in range(len(List_of_words) - 1):
         if List_of_words[i] != '' and List_of_words[i+1] != '':
@@ -73,8 +75,8 @@ def main():
     string = ''
     for i in range(amount_of_senstences):
         random.seed()
-        lastword = List_of_capitals[random.randint(0, Num_of_capitals - 1)]
-        iterations = random.randint(4, 19)
+        lastword = List_of_capitals[random.randint(0, Amount_of_capitals - 1)]
+        iterations = random.randint(4, 19)    # Количество слов в предложении  
         ended = False
         for j in range(iterations):
             if lastword not in List_of_endings:
