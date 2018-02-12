@@ -10,7 +10,7 @@ import random
 def main():
     # Вывод шапки.  
     filename = input('Имя файла: ')
-    amount_of_senstences = int(input('Количество генерируемых предложений: '))
+    amount_of_sentences = int(input('Количество генерируемых предложений: '))
 
     # Создаём строку разрешённых символов.  
     LETTERSBIG = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -73,7 +73,7 @@ def main():
     
     # Создание предложений.
     string = ''
-    for i in range(amount_of_senstences):
+    for i in range(amount_of_sentences):
         random.seed()
         lastword = List_of_capitals[random.randint(0, Amount_of_capitals - 1)]
         iterations = random.randint(4, 19)    # Количество слов в предложении  
