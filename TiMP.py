@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
-
 def CardCheck(f, cardId):
     uData = 0
     for line in f:
         if line.split(' ')[0] == cardId:
-            uData = line.split(' ')
+            uData = line.strip().split(' ')
     return uData
 
 def PinCheck(attempt, truePin):
@@ -27,7 +25,7 @@ def Operations(uData):
     print('3) Отмена операции')
     choice = 0
     while(choice == 0):
-        choice = int(input('Выберите операцию нажатием кнопки 1, 2 или 3:'))
+        choice = int(input('Выберите операцию нажатием кнопки 1, 2 или 3: '))
         if choice > 3:
             print('Вы нажали на неверную кнопку. Повторите попытку')
             choice = 0
@@ -37,7 +35,7 @@ def Operations(uData):
                 choice = 0
             elif choice == 2:
                 amount = int(input('Введите сумму списывания: '))
-                if amount > uData[2]:
+                if amount > int(uData[2]):
                     print('На вашем счёте недостаточно денег')
                     choice = 0
                 else:
@@ -55,7 +53,7 @@ def CardBlock(uData):
     print('8-800-555-35-35')
     if uData[4] != input('Введите код: '):
         print('Карта была заблокирована')
-        uData = {}
+        uData = ['']
     else:
         print('Карта не была заблокирована. Подождите перед следующей попыткой')
     return uData
@@ -71,24 +69,41 @@ def Authorised(uData):
 
 def main():
     filename = ('doc.txt')
-    f = open(filename, 'r', encoding = 'utf8')
+    with open(filename) as f1:
+        text = f1.read()
+    text = text.split('\n')
+    text_list = []
+    for i in text:
+        a = i.strip().split(' ')
+        text_list.append(a)
+    f2 = open(filename)
     cardId = input('Вставьте карту: ')
     cardId = cardId.replace(' ', '')
-    uData = CardCheck(f, cardId)
-    text = [line.split('\n') for line in f]
-    f.close()
-    print(text)
-    f = open(filename, 'w', encoding = 'utf8')
+    uData = CardCheck(f2, cardId)
+    f2.close()
     if uData != 0:
+        f3 = open(filename, 'w')
         newData = Authorised(uData)
-        for i in text:
-            if i[0] == newData[0]:
-                i = newData
-        newText = ''.join(a+'\n' for a in text)
-        f.write(newText)
+        newText = ''
+        if text_list[0][0] == uData[0]:
+            for j in newData:
+                newText += j+' '
+        else:
+            for j in text_list[0]:
+                newText += j+' '
+        text_list.pop(0)
+        for i in text_list:
+            newText += '\n'
+            if i[0] == uData[0]:
+                for j in newData:
+                    newText += j+' '
+            else:
+                for j in i:
+                    newText += j+' '
+        f3.write(newText)
+        f3.close()
     else:
         print('Ваша карта не принадлежит нашему банку. Заберите карту')
-    f.close()
     return 0
 
 main()
